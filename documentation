@@ -1,0 +1,50 @@
+All codes based on Andrej Karpathy’s char-rnn code. https://github.com/karpathy/char-rnn
+
+Model files
+------------
+LSTM.lua – Simple LSTM architecture. For multiclass problems
+LSTM_f.lua – Simple LSTM architecture. For multiclass problems. Layers annotated for f gate initialization
+LSTM_binary.lua – Simple LSTM architecture. For binary class problems
+LSTM_f_2dl.lua – Simple LSTM architecture. Two different hidden layer sizes allowed.
+LSTM_f_dr.lua – Dimensionality reduction before simple LSTM architecture
+LSTM_f_2dl_dr.lua – Dimensionality reduction before LSTM architecture. Two different hidden layer sizes allowed
+LSTM1.lua – Late fusion of 2 modalities. Two separate LSTMs for the two modalities combined at the top using a linear layer with number of neurons = no. of classes
+LSTM2.lua – 2 different LSTMs for the 2 modalities followed by 1 LSTM for combining. No linear layer between modality specific and combination LSTMs
+LSTM3.lua – Early fusion of 2 modalities. 2 modalities first combined using a linear layer followed by 1 combination LSTM
+LSTM4.lua - 2 different LSTMs for the 2 modalities followed by 1 LSTM for combining. Linear layer between modality specific and combination LSTMs
+LSTM2_all.lua – Combination similar to LSTM2.lua for 3 modalities
+LSTM4_all.lua – Combination similar to LSTM4.lua for 3 modalities
+
+Training files (th filename.lua –arguments)
+------------
+train_1_ucf.lua – Training file using LSTM1 as the model
+train_2_ucf.lua – Training file using LSTM2 as the model
+train_3_ucf.lua – Training file using LSTM3 as the model
+train_4_ucf.lua – Training file using LSTM4 as the model
+train_ucf_2dl.lua – Training file using LSTM_f_2dl as the model
+train_ucf_dr.lua  - Training file using LSTM_f_dr as the model
+train_ucf_ef.lua – Training file for early fusion of 2 modalities. Does not use any linear layer for dimensionality reduction
+
+Evaluation files (th filename.lua –init_from saved_weight_file)
+------------
+eval_1_ucf.lua – Evaluation files for saved models of type LSTM1. Provides accuracy on test set
+eval_2_ucf.lua – Evaluation files for saved models of type LSTM2. Provides accuracy on test set
+eval_3_ucf.lua – Evaluation files for saved models of type LSTM3. Provides accuracy on test set
+eval_4_ucf.lua – Evaluation files for saved models of type LSTM4. Provides accuracy on test set
+
+Fine-tuning files (th filename.lua –init_from saved_weight_file –other arguments)
+------------
+finetune_1_ucf.lua – Fine tune saved models of type LSTM1. Final classification layer is re-initialized
+finetune_2_ucf.lua – Fine tune saved models of type LSTM2. Final classification layer is re-initialized
+finetune_4_ucf.lua – Fine tune saved models of type LSTM4. Final classification layer is re-initialized
+
+action_matlab files
+------------
+ComputeSpatialAccuracy.m – Computes prediction accuracy of a list of videos using Spatial CNN model file. Every 10th frame sampled
+ComputeTemporalAccuracy.m - Computes prediction accuracy of a list of videos using Temporal CNN model file. Every 10th frame sampled
+ComputeSpatialAccuracy_25.m – Computes prediction accuracy of a list of videos using Spatial CNN model file. 25 equally spaced frames sampled
+convert_protomean.py – Converts protomean files to python/numpy readable .npy files. This can then be used to create mat files for mean files
+ExtractSpatialFeatures.m – Extract features from videos using Spatial CNN. Every 10th frame is sampled
+ExtractTemporalFeatures.m – Extract features from videos using Temporal CNN. Every 10th frame is sampled
+VideoSpatialPrediction.m – Prediction using Spatial CNN for a single video
+VideoTemporalPrediction.m – Prediction using Temporal CNN for a single video
